@@ -1,0 +1,11 @@
+!.keep
+*.DS_Store
+/.bundle
+/.env
+/.env.local
+/.env.development.local
+/.env.test.local
+/coverage/*
+/log/*
+/tmp/*
+
