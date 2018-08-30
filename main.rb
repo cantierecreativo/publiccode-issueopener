@@ -19,13 +19,13 @@ end
 
 puts "Initalizing..."
 
-@client = Octokit::Client.new(access_token: ENV['GITHUB_ACCESS_TOKEN'])
+@client = Octokit::Client.new(access_token: ENV["GITHUB_ACCESS_TOKEN"])
 @client.auto_paginate = true
 
 user = @client.user
 puts "Using token from account \"#{user.login}\""
 
-repos = File.readlines(ENV['REPOS_LIST']).each(&:chomp!)
+repos = File.readlines(ENV["REPOS_LIST"]).each(&:chomp!)
 puts "Number of repos got from list: #{repos.size}"
 
 repos.each do |repo|
