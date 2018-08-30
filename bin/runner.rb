@@ -1,4 +1,5 @@
-require 'dotenv/load'
+#!/usr/bin/env ruby
+require "dotenv/load"
 
 while true do
   puts "Running main script"
