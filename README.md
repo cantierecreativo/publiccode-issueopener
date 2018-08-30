@@ -12,10 +12,14 @@ gem install bundler
 bundle
 ```
 
+Copy `.env.sample` to `.env` and fill the appropriate values.
+
 ## Running
 
 Two scripts are provided:
-`runner.rb` is an infinite loop that runs the main script and then sleeps for a while.
+
+`runner.rb` is an infinite loop that runs the main script and then sleeps for a while
+
 `main.rb` is reads the repo list then checks and opens issues
 
 Just exec:
