@@ -25,7 +25,7 @@ Two scripts are provided:
 Just exec:
 
 ```
-ruby main.rb
+bin/main
 ```
 
 ## Generating Github Access Token
