@@ -1,3 +1,5 @@
+require 'dotenv/load'
+
 while true do
   puts "Running main script"
   system("ruby", "main.rb")
