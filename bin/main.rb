@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+require "bundler/setup"
 require "dotenv/load"
-require "Octokit"
+require "octokit"
 
 def open_issue(repo)
   puts "Openening Publiccode issue in the repo \"#{repo}\"..."
