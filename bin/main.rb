@@ -6,9 +6,13 @@ require "octokit"
 def open_issue(repo)
   puts "Openening Publiccode issue in the repo \"#{repo}\"..."
 
+  api_url = "https://api.github.com/repos/#{repo}/contents/publiccode.yml"
+
   body = <<EOF
-  We should decide what to put in here!
-  Maybe the link to the editor/validator.
+  The publiccode.yml file contained in the repo is not valid.
+  You can try to fix it with the [editor](http://publiccode.surge.sh/)
+  Use the \"Upload\" button and paste this url:
+  `#{api_url}`
 EOF
 
   @client.create_issue(
