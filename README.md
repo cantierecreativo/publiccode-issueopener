@@ -18,14 +18,14 @@ Copy `.env.sample` to `.env` and fill the appropriate values.
 
 Two scripts are provided:
 
-`runner.rb` is an infinite loop that runs the main script and then sleeps for a while
+`bin/runner.rb` is an infinite loop that runs the main script and then sleeps for a while
 
-`main.rb` is reads the repo list then checks and opens issues
+`bin/main.rb` reads the repo list then checks and opens issues
 
-Just exec:
+Just exec from the project root:
 
 ```
-bin/main
+bin/main.rb
 ```
 
 ## Generating Github Access Token
