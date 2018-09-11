@@ -52,10 +52,11 @@ read:discussion
 
 ## Repos list
 
-Fill `tmp/repos.lst` with a list of repos like:
+This list is usually produced by the developersitalia-backend crawler.
+
+To do some tests manually, fill `tmp/repos.lst` with a list of repos like:
 
 ```
-italia/publiccode.yml
-italia/spid-ruby
-italia/pagopa-soap-ruby
+https://raw.githubusercontent.com/gith002/InvalidPubliccode/master/publiccode.yml
+https://raw.githubusercontent.com/gith003/publiccode-org3/master/publiccode.yml
 ```
