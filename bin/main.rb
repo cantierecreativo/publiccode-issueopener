@@ -2,6 +2,7 @@
 require "bundler/setup"
 require "dotenv/load"
 require "octokit"
+require "open3"
 
 def open_issue(repo)
   puts "Openening Publiccode issue in the repo \"#{repo}\"..."
@@ -31,26 +32,41 @@ puts "Initalizing..."
 user = @client.user
 puts "Using token from account \"#{user.login}\""
 
-repos = File.readlines(ENV["REPOS_LIST"]).each(&:chomp!)
-puts "Number of repos got from list: #{repos.size}"
+## Shameful hack FIXME - It seems Ruby is somehow unable to read files from
+## filesystem when running this script inside Docker
+stdout, stderr, status = Open3.capture3("cat #{ENV["REPOS_LIST"]}")
+yaml_files = stdout.split(/[\r\n]+/).uniq!
 
-repos.each do |repo|
-  begin
-    issues = @client.issues(repo, query: {state: 'open', creator: user.login})
-    # puts "Open issues on \"#{repo}\": #{issues.length} from \"#{user.login}\""
+## Method 1, not working in Docker
+# yaml_files = File.readlines(ENV["REPOS_LIST"]).each(&:chomp!)
+
+## Method 2, not working in Docker
+# file = File.open(ENV["REPOS_LIST"], "r")
+# yaml_files = file.read.split(/[\r\n]+/)
+
+puts "Bad yaml files got from list: #{yaml_files.inspect}"
+
+if yaml_files != nil
+  yaml_files.each do |yaml_file|
+    repo = yaml_file.split("/")[3,2].join("/")
+    begin
+      issues = @client.issues(repo, query: {state: 'open', creator: user.login})
+    
+      if issues.any? {|issue| issue.title.include?("[publiccode]") }
+        puts "Open Publiccode issue already present in the repo \"#{repo}\""
+      else
+        open_issue(repo)
+      end
   
-    if issues.any? {|issue| issue.title.include?("[publiccode]") }
-      puts "Open Publiccode issue already present in the repo \"#{repo}\""
-    else
-      open_issue(repo)
+    rescue StandardError => e
+      puts "------------ Error with repo \"#{repo}\": ------------"
+      puts e.message
+      puts e.backtrace.join("\n")
+      puts "------------------------------------------------------"
     end
-
-  rescue StandardError => e
-    puts "------------ Error with repo \"#{repo}\": ------------"
-    puts e.message
-    puts e.backtrace.join("\n")
-    puts "------------------------------------------------------"
   end
-
 end
+
+puts "Truncating bad yaml list file"
+system "truncate -s 0 #{ENV["REPOS_LIST"]}"
 
