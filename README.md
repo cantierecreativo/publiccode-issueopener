@@ -1,5 +1,8 @@
 # Publiccode issue opener
 
+This script opens issues on Github given a list of bad publiccode.yml urls.
+
+The list is produced by the developersitalia-backend crawler.
 
 ## Setup
 
@@ -28,6 +31,14 @@ Just exec from the project root:
 bin/main.rb
 ```
 
+## Running inside Docker
+
+```
+docker build -t publiccode-issueopener .
+docker run -it publiccode-issueopener
+```
+
+
 ## Generating Github Access Token
 [https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/)
 
@@ -39,7 +50,7 @@ write:discussion
 read:discussion 
 ```
 
-# Repos list
+## Repos list
 
 Fill `tmp/repos.lst` with a list of repos like:
 
