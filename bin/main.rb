@@ -11,7 +11,7 @@ def open_issue(repo)
 
   body = <<EOF
   The publiccode.yml file contained in the repo is not valid.
-  You can try to fix it with the [editor](http://publiccode.surge.sh/)
+  You can try to fix it with the [editor](https://publiccode-editor.developers.italia.it/)
   Use the \"Upload\" button and paste this url:
   `#{api_url}`
 EOF
